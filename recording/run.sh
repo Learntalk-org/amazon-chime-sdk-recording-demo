@@ -57,6 +57,8 @@ sleep 0.5  # Ensure this has started before moving on
 google-chrome \
     ${BROWSER_URL} \
     --profile-directory=Default \
+    --no-first-run \
+    --no-default-browser-check \
     --window-size='1280,720' \
   &
 sleep 0.5  # Ensure this has started before moving on
