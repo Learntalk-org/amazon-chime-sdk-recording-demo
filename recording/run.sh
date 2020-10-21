@@ -22,7 +22,7 @@ pacmd set-default-source v1.monitor  # Set the monitor of the v1 sink to be the 
 # Start X11 virtual framebuffer so Firefox will have somewhere to draw
 Xvfb :${X_SERVER_NUM} -ac -screen 0 ${SCREEN_RESOLUTION}x${COLOR_DEPTH} > /dev/null 2>&1 &
 export DISPLAY=:${X_SERVER_NUM}.0
-sleep 0.5  # Ensure this has started before moving on
+sleep 1.5  # Ensure this has started before moving on
 
 # Create a new Firefox profile for capturing preferences for this
 #firefox --no-remote --new-instance --createprofile "foo4 /tmp/foo4"
@@ -61,8 +61,8 @@ google-chrome \
     --no-default-browser-check \
     --window-size='1280,720' \
   &
-sleep 0.5  # Ensure this has started before moving on
-xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
+sleep 1.5  # Ensure this has started before moving on
+#xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
 
 exec node /recording/record.js ${S3_BUCKET_NAME} ${SCREEN_WIDTH} ${SCREEN_HEIGHT}
 
