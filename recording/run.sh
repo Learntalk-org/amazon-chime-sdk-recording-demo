@@ -52,9 +52,11 @@ sleep 1.5  # Ensure this has started before moving on
 # NB: The `--width` and `--height` arguments have to be very early in the
 # argument list or else only a white screen will result in the capture for some
 # reason.
-
-
-google-chrome \
+#    --no-sandbox \
+#    --disable-gpu \
+#    --disable-software-rasterizer \
+#google-chrome \
+chromium-browser \
     'https://learntalkapp.com/auto_login/?email=nespraldiana%40gmail.com&token=e2cd977e6627c92e6d444eb012d3e26d&meeting_bot_token=88888888' \
     --profile-directory=Default \
     --no-first-run \
