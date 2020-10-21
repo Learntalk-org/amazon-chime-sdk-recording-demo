@@ -14,7 +14,7 @@ RUN /usr/bin/apt-get update && \
 
 RUN
     /usr/bin/apt-get install -y wget --no-install-recommends && \
-     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /usr/bin/ && \
+      wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | bash - && \
      dpkg --unpack google-chrome-stable_current_amd64.deb && \
       /usr/bin/apt-get install -f -y
 
