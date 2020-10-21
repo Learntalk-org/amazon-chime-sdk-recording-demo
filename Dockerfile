@@ -21,9 +21,9 @@ RUN /usr/bin/apt-get update && \
 
 RUN /usr/bin/apt-get update && \
     /usr/bin/apt-get install -y gnupg wget --no-install-recommends && \
-    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | bash - && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | bash - && \
     /usr/bin/apt-get update -y && \
-    /usr/bin/apt-get install -f -y google-chrome-stable_current_amd64.deb
+    /usr/bin/apt-get install -f -y ./google-chrome-stable_current_amd64.deb
 
 #/////////////////////////
 ## We need wget to set up the PPA and xvfb to have a virtual screen and unzip to install the Chromedriver
