@@ -13,7 +13,7 @@ RUN /usr/bin/apt-get update && \
 	/usr/bin/apt-get install -y nodejs pulseaudio xvfb ffmpeg xdotool unzip
 
 RUN /usr/bin/apt-get update && \
-    /usr/bin/apt-get install -y gnupg wget --no-install-recommends && \
+    /usr/bin/apt-get install -y gnupg wget && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb | bash - && \
     /usr/bin/apt-get update -y && \
     /usr/bin/apt-get install -f -y ./google-chrome-stable_current_amd64.deb
