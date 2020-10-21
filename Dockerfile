@@ -18,8 +18,6 @@ RUN /usr/bin/apt-get update && \
 #    /usr/bin/apt-get update -y && \
 #    /usr/bin/apt-get install -y ./google-chrome-stable_current_amd64.deb
 
-# See https://codeship.com/documentation/docker/browser-testing/
-FROM myapp:base
 
 # We need wget to set up the PPA and xvfb to have a virtual screen and unzip to install the Chromedriver
 RUN apt-get install -y wget xvfb unzip
