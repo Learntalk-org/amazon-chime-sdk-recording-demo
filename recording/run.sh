@@ -62,7 +62,7 @@ google-chrome \
     --window-size='1280,720' \
   &
 sleep 1.5  # Ensure this has started before moving on
-#xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
+# xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
 
 exec node /recording/record.js ${S3_BUCKET_NAME} ${SCREEN_WIDTH} ${SCREEN_HEIGHT}
 
