@@ -25,49 +25,45 @@ export DISPLAY=:${X_SERVER_NUM}.0
 sleep 0.5  # Ensure this has started before moving on
 
 # Create a new Firefox profile for capturing preferences for this
-#firefox --no-remote --new-instance --createprofile "foo4 /tmp/foo4"
+firefox --no-remote --new-instance --createprofile "foo4 /tmp/foo4"
 
 # Install the OpenH264 plugin for Firefox
-#mkdir -p /tmp/foo4/gmp-gmpopenh264/1.8.1.1/
-#pushd /tmp/foo4/gmp-gmpopenh264/1.8.1.1 >& /dev/null
-#curl -s -O http://ciscobinary.openh264.org/openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
-#unzip openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
-#rm -f openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
-#popd >& /dev/null
+mkdir -p /tmp/foo4/gmp-gmpopenh264/1.8.1.1/
+pushd /tmp/foo4/gmp-gmpopenh264/1.8.1.1 >& /dev/null
+curl -s -O http://ciscobinary.openh264.org/openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
+unzip openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
+rm -f openh264-linux64-2e1774ab6dc6c43debb0b5b628bdf122a391d521.zip
+popd >& /dev/null
 
 # Set the Firefox preferences to enable automatic media playing with no user
 # interaction and the use of the OpenH264 plugin.
-#cat <<EOF >> /tmp/foo4/prefs.js
-#user_pref("media.autoplay.default", 0);
-#user_pref("media.autoplay.enabled.user-gestures-needed", false);
-#user_pref("media.navigator.permission.disabled", true);
-#user_pref("media.gmp-gmpopenh264.abi", "x86_64-gcc3");
-#user_pref("media.gmp-gmpopenh264.lastUpdate", 1571534329);
-#user_pref("media.gmp-gmpopenh264.version", "1.8.1.1");
-#user_pref("doh-rollout.doorhanger-shown", true);
-#EOF
+cat <<EOF >> /tmp/foo4/prefs.js
+user_pref("media.autoplay.default", 0);
+user_pref("media.autoplay.enabled.user-gestures-needed", false);
+user_pref("media.navigator.permission.disabled", true);
+user_pref("media.gmp-gmpopenh264.abi", "x86_64-gcc3");
+user_pref("media.gmp-gmpopenh264.lastUpdate", 1571534329);
+user_pref("media.gmp-gmpopenh264.version", "1.8.1.1");
+user_pref("doh-rollout.doorhanger-shown", true);
+EOF
 
 # Start Firefox browser and point it at the URL we want to capture
 #
 # NB: The `--width` and `--height` arguments have to be very early in the
 # argument list or else only a white screen will result in the capture for some
 # reason.
-#    --no-sandbox \
-#    --disable-gpu \
-#    --disable-software-rasterizer \
-#google-chrome \
-dbus-launch chromium-browser \
-    ${BROWSER_URL} \
-    --profile-directory=Default \
-    --no-first-run \
-    --no-default-browser-check \
-    --no-sandbox \
-    --disable-gpu \
-    --disable-software-rasterizer \
-    --window-size='1280,720' \
+
+firefox \
+  -P foo4 \
+  --width ${SCREEN_WIDTH} \
+  --height ${SCREEN_HEIGHT} \
+  --new-instance \
+  --first-startup \
+  --foreground \
+  --kiosk \
+  --ssb ${BROWSER_URL} \
   &
 sleep 0.5  # Ensure this has started before moving on
 xdotool mousemove 1 1 click 1  # Move mouse out of the way so it doesn't trigger the "pause" overlay on the video tile
 
 exec node /recording/record.js ${S3_BUCKET_NAME} ${SCREEN_WIDTH} ${SCREEN_HEIGHT}
-
