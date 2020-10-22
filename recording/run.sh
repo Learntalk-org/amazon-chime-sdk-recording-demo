@@ -56,7 +56,7 @@ sleep 1.5  # Ensure this has started before moving on
 #    --disable-gpu \
 #    --disable-software-rasterizer \
 #google-chrome \
-google-chrome \
+chromium-browser \
     ${BROWSER_URL} \
     --profile-directory=Default \
     --no-first-run \
