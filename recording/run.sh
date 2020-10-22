@@ -56,13 +56,14 @@ sleep 1.5  # Ensure this has started before moving on
 #    --disable-gpu \
 #    --disable-software-rasterizer \
 #google-chrome \
-chromium-browser \
-    'https://learntalkapp.com/auto_login/?email=nespraldiana%40gmail.com&token=e2cd977e6627c92e6d444eb012d3e26d&meeting_bot_token=88888888' \
+google-chrome \
+    ${BROWSER_URL} \
     --profile-directory=Default \
     --no-first-run \
     --no-default-browser-check \
     --no-sandbox \
     --disable-gpu \
+    --headless \
     --disable-software-rasterizer \
     --window-size='1280,720' \
   &
