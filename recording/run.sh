@@ -56,8 +56,8 @@ sleep 0.5  # Ensure this has started before moving on
 #    --disable-gpu \
 #    --disable-software-rasterizer \
 #google-chrome \
-chromium-browser \
-    'https://learntalkapp.com/auto_login/?email=nespraldiana%40gmail.com&token=e2cd977e6627c92e6d444eb012d3e26d&meeting_bot_token=88888888&record=true' \
+dbus-launch chromium-browser \
+    ${BROWSER_URL} \
     --profile-directory=Default \
     --no-first-run \
     --no-default-browser-check \
