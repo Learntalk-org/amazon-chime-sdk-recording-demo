@@ -61,7 +61,9 @@ chromium-browser \
     --profile-directory=Default \
     --no-first-run \
     --no-default-browser-check \
+    --no-sandbox \
     --disable-gpu \
+    --incognito \ 
     --disable-software-rasterizer \
     --window-size='1280,720' \
   &
