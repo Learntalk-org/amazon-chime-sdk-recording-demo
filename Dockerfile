@@ -5,7 +5,7 @@ FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN useradd recorder
+#RUN useradd recorder
 
 RUN /usr/bin/apt-get update && \
 	/usr/bin/apt-get install -y curl && \
