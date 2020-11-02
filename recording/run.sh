@@ -6,8 +6,8 @@
 set -xeo pipefail
 
 BROWSER_URL="${MEETING_URL}&record=true"
-SCREEN_WIDTH=${RECORDING_SCREEN_WIDTH:-'1920'}
-SCREEN_HEIGHT=${RECORDING_SCREEN_HEIGHT:-'1080'}
+SCREEN_WIDTH=${RECORDING_SCREEN_WIDTH:-'1280'}
+SCREEN_HEIGHT=${RECORDING_SCREEN_HEIGHT:-'720'}
 SCREEN_RESOLUTION=${SCREEN_WIDTH}x${SCREEN_HEIGHT}
 COLOR_DEPTH=24
 X_SERVER_NUM=1
@@ -40,7 +40,7 @@ popd >& /dev/null
 cat <<EOF >> /tmp/foo4/prefs.js
 user_pref("media.autoplay.default", 0);
 user_pref("media.autoplay.enabled.user-gestures-needed", false);
-user_pref("media.navigator.permission.disabled", true);
+#user_pref("media.navigator.permission.disabled", true);
 user_pref("media.gmp-gmpopenh264.abi", "x86_64-gcc3");
 user_pref("media.gmp-gmpopenh264.lastUpdate", 1571534329);
 user_pref("media.gmp-gmpopenh264.version", "1.8.1.1");
