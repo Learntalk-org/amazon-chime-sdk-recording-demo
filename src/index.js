@@ -41,7 +41,8 @@ exports.handler = function(event, context, callback) {
         case 'start':
             if(event.queryStringParameters && event.queryStringParameters.meetingURL) {
                 console.log("Meeting URL: " + event.queryStringParameters.meetingURL);
-                console.log("Meeting URL: " + event.queryStringParameters.serviceUUID);
+                console.log("Service UUID: " + event.queryStringParameters.serviceUUID);
+
                 serviceUUID = decodeURIComponent(event.queryStringParameters.serviceUUID);
                 meetingURL = decodeURIComponent(event.queryStringParameters.meetingURL);
                 return startRecording(event, context, callback, meetingURL, serviceUUID);
@@ -90,7 +91,7 @@ exports.handler = function(event, context, callback) {
     callback(null, response);
 };
 
-function startRecording(event, context, callback, meetingUrl, serviceUUID) {
+function startRecording(event, context, callback, meetingUrl, serviceUuid) {
     let ecsRunTaskParams = {
         cluster: ecsClusterArn,
         launchType: "EC2",
@@ -105,7 +106,7 @@ function startRecording(event, context, callback, meetingUrl, serviceUUID) {
                         },
                         {
                             name: "SERVICE_UUID",
-                            value: serviceUUID
+                            value: serviceUuid
                         },
                         {
                             name: "RECORDING_ARTIFACTS_BUCKET",

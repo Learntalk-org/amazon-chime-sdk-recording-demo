@@ -22,7 +22,7 @@ const VIDEO_FRAMERATE = 30;
 const VIDEO_GOP = VIDEO_FRAMERATE * 2;
 const AUDIO_BITRATE = '160k';
 const AUDIO_SAMPLERATE = 44100;
-const AUDIO_CHANNELS = 2
+const AUDIO_CHANNELS = 2;
 const DISPLAY = process.env.DISPLAY;
 
 const transcodeStreamToOutput = spawn('ffmpeg',[
