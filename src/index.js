@@ -25,6 +25,7 @@ let response = {
  
 exports.handler = function(event, context, callback) {
     let meetingURL = "";
+    let serviceUUID = "";
     let taskId = "";
     let recordingAction = "";
     
@@ -40,8 +41,10 @@ exports.handler = function(event, context, callback) {
         case 'start':
             if(event.queryStringParameters && event.queryStringParameters.meetingURL) {
                 console.log("Meeting URL: " + event.queryStringParameters.meetingURL);
+                console.log("Meeting URL: " + event.queryStringParameters.serviceUUID);
+                serviceUUID = decodeURIComponent(event.queryStringParameters.serviceUUID);
                 meetingURL = decodeURIComponent(event.queryStringParameters.meetingURL);
-                return startRecording(event, context, callback, meetingURL);
+                return startRecording(event, context, callback, meetingURL, serviceUUID);
             } else {
                 responseBody = {
                     message: "Missing parameter: meetingURL",
@@ -87,7 +90,7 @@ exports.handler = function(event, context, callback) {
     callback(null, response);
 };
 
-function startRecording(event, context, callback, meetingUrl) {
+function startRecording(event, context, callback, meetingUrl, serviceUUID) {
     let ecsRunTaskParams = {
         cluster: ecsClusterArn,
         launchType: "EC2",
@@ -99,6 +102,10 @@ function startRecording(event, context, callback, meetingUrl) {
                         { 
                             name: "MEETING_URL",
                             value: meetingUrl
+                        },
+                        {
+                            name: "SERVICE_UUID",
+                            value: serviceUUID
                         },
                         {
                             name: "RECORDING_ARTIFACTS_BUCKET",
