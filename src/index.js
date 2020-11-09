@@ -39,7 +39,7 @@ exports.handler = function(event, context, callback) {
     
     switch(recordingAction.toLowerCase()) {
         case 'start':
-            if(event.queryStringParameters && event.queryStringParameters.meetingURL) {
+            if(event.queryStringParameters && event.queryStringParameters.meetingURL && event.queryStringParameters.serviceUUID) {
                 console.log("Meeting URL: " + event.queryStringParameters.meetingURL);
                 console.log("Service UUID: " + event.queryStringParameters.serviceUUID);
 
@@ -48,7 +48,7 @@ exports.handler = function(event, context, callback) {
                 return startRecording(event, context, callback, meetingURL, serviceUUID);
             } else {
                 responseBody = {
-                    message: "Missing parameter: meetingURL",
+                    message: "Missing parameter: meetingURL or serviceUUID",
                     input: event
                 };
                 response = {
